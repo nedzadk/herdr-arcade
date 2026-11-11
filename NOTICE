@@ -1,0 +1,11 @@
+Herdr Arcade
+An 8-bit theme, layout and mods for the Herdr desktop app.
+
+The mods in mods/arcade-* started as copies of mods that ship with Herdr
+(agents, spaces, tabs, pane, toast, workspace-chrome, workspace-status),
+made with `herdr-app do mod.clone`, and have been modified. Each mod.json
+records the original under "cloned_from". Herdr is licensed under the
+Apache License 2.0; see LICENSE.
+
+mods/quest, the theme, the pixel art and the sound effects are new work in
+this repository, released under the same license.
