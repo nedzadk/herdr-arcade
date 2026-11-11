@@ -26,25 +26,17 @@ function toggleSidebar() {
   run("layout.resize", { id: "sidebar", px: narrow() ? (shared("sidebar.width") ?? 268) : window()?.platform === "macos" ? 76 : 44 });
 }
 
-// Robot colors (custom-icons/retro/robot-<color>.svg). Each space always gets the same
-// one, picked from its name. To choose a space's color, add it to SPACE_COLORS,
-// e.g. { api: "green" }.
-const COLORS = ["orange", "blue", "purple", "green", "pink", "steel"];
-const SPACE_COLORS = {};
-function colorOf(space) {
-  if (SPACE_COLORS[space]) return SPACE_COLORS[space];
-  let h = 0;
-  for (const ch of space) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  return COLORS[h % COLORS.length];
-}
+// Robots wear their space tile's color: arcade-spaces keeps each space's palette color in
+// shared("space.colors"), and custom-icons/retro/robot-<color>.svg exists for each one.
+const ROBOT_COLORS = new Set(["ansi6", "ansi3", "ansi4", "ansi5", "ansi2", "ansi1"]);
 
 const stageOf = (lv) => (lv >= 20 ? 3 : lv >= 10 ? 2 : lv >= 5 ? 1 : 0);
 // The agent's robot: its space's color, evolved by level. Non-robot agents keep their own icon.
 function robotFor(a, size, stage, t) {
   const isRobot = String(a.program?.icon ?? "").endsWith("pixel-robot.svg");
   if (!isRobot) return icon(a.program, size, t.foreground);
-  const space = (a.space_name ?? "").toLowerCase();
-  const key = space ? colorOf(space) : "steel";
+  const color = (shared("space.colors") ?? {})[a.space] ?? "ansi6"; // same default as the tiles
+  const key = ROBOT_COLORS.has(color) ? color : "steel";
   const file = stage ? `custom-icons/retro/robot-${key}-${stage}.svg` : key === "steel" ? "custom-icons/pixel-robot.svg" : `custom-icons/retro/robot-${key}.svg`;
   return image(file).w(size).h(size).flex_none();
 }

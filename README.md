@@ -5,7 +5,7 @@ An 8-bit look and a small game layer for the [Herdr](https://herdr.dev) desktop 
 ![Herdr Arcade with five agents: one needs you, one is done, one is working and two are idle](screenshots/overview.png)
 
 - **Retro look:** indigo and gold palette, dithered backgrounds, square bevelled panels, pixel font.
-- **Pixel robots:** each Claude agent is a robot in its space's color. Robots get antennas, a visor and then a crown as you level up.
+- **Pixel robots:** each Claude agent is a robot in the same color as its space's tile. Robots get antennas, a visor and then a crown as you level up.
 - **Spaces as tiles:** each space is a bevelled letter tile under its machine (Local or Remote), with Working, Needs you, Done or Idle next to it.
 - **Quest Mode:** a status bar HUD with XP, levels, coins, a daily streak, combos, three daily quests and achievements. Finishing agent tasks, unblocking agents quickly and merged PRs all score.
 - **Mana bar:** how much of your weekly Claude limit is left, as a potion.
@@ -30,7 +30,7 @@ Each agent is a pixel robot. An agent that needs you gets a red bar that fills w
 
 ### Robots that evolve
 
-Robots get a gold antenna at level 5, a visor at level 10 and a crown at level 20. Each space always gets the same color.
+Each robot wears its space tile's color: teal, orange, blue, purple, green or pink. Robots get a gold antenna at level 5, a visor at level 10 and a crown at level 20.
 
 <img src="screenshots/robots.png" width="400" alt="Six robot colors at levels 1, 5, 10 and 20">
 
@@ -129,7 +129,6 @@ The bar refreshes once a minute.
 ## Customizing
 
 - **Quiet hours:** `QUIET_FROM` and `QUIET_UNTIL` in `mods/quest/main.js`. At those times Quest Mode turns `sounds.enabled` in `settings.json` off and on, and mutes its own sounds.
-- **Robot colors:** `SPACE_COLORS` in `mods/arcade-agents/main.js`, e.g. `{ api: "green" }`. The colors are orange, blue, purple, green, pink and steel.
 - **Machine names:** every remote machine shows as "Remote". To name them, fill in `MACHINE_LABELS` in `mods/arcade-spaces/main.js`.
 
 ## License
